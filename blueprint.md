@@ -3,20 +3,28 @@
 
 ## Overview
 
-This project is an e-commerce store built with Next.js and styled with Tailwind CSS. It fetches product data from the Fake Store API and displays it in a modern, user-friendly interface.
+This project is an e-commerce store built with Next.js and styled with Tailwind CSS. It fetches product data from the Fake Store API and displays it in a modern, user-friendly interface. The application is designed to be resilient, with graceful error handling for API data fetching.
 
 ## Features
 
-*   **Product Catalog:** Browse a grid of products fetched from a remote API.
-*   **Product Card:** Each product is displayed with its image, title, price, and an "Añadir al carrito" button.
+*   **Product Catalog:** Browse a grid of all available products on a single page.
+*   **Dynamic Shopping Cart:** A fully functional shopping cart that allows users to add, remove, and adjust the quantity of items.
+*   **Product Detail Pages:** Users can click on a product to view a dedicated page with more details.
 *   **Responsive Design:** The layout adapts to different screen sizes for a seamless experience on desktop and mobile devices.
 *   **Modern Styling:** The UI is designed with a clean and modern aesthetic, featuring a dark mode, custom fonts, and subtle animations.
-*   **Pages:** The application includes a home page, a store page, and an about page.
 
 ## Style and Design
 
-*   **Layout:** The application uses a main layout with a header and a main content area. The header contains the navigation links.
-*   **Typography:** The application uses the "Inter" font from Google Fonts.
-*   **Color Palette:** The color scheme is based on a dark theme with a background color of `#0a0a0a` and a foreground color of `#ededed`. The primary color is `#3b82f6`.
+*   **Layout:** The application uses a main layout with a header containing the store's title and a cart icon. The main content area displays the product grid.
+*   **Typography:** The application uses the "Geist" font for a modern and clean look.
+*   **Color Palette:** The color scheme is based on a dark theme with a black background and white text, and a light theme with a white background and black text. Accent colors are used for buttons and notifications.
 *   **Product Cards:** Product cards have a border, rounded corners, and a box shadow to create a "lifted" effect. They also feature a subtle hover effect.
+*   **Shopping Cart:** The shopping cart is a slide-out panel that provides a clear overview of the selected items, quantities, and total price.
+
+## Current Plan: Recent Changes
+
+*   **Removed Pagination:** The pagination feature has been removed from the main product grid. All products are now displayed on a single, scrollable page.
+*   **Added Quantity Controls:** The shopping cart has been enhanced with "+" and "-" buttons, allowing users to easily increase or decrease the quantity of each item in their cart.
+*   **Robust Error Handling:** Implemented a `try...catch` block for the product fetching logic to prevent the application from crashing if the API is unavailable. The page now displays a user-friendly error message instead.
+*   **Refactored Data Fetching:** Reverted the data fetching strategy from client-side back to server-side rendering (SSR) to align with Vercel's best practices, ensuring optimal performance and SEO.
 

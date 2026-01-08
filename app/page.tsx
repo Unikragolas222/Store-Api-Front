@@ -26,19 +26,17 @@ async function getProducts(): Promise<{ products: Product[], total: number }> {
   }
 }
 
-
 export default async function HomePage() {
   const { products } = await getProducts();
 
   if (products.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center min-h-screen text-center">
-        <h1 className="text-2xl font-bold mb-4">Failed to Load Products</h1>
-        <p>There was an issue fetching products from the API. Please try again later.</p>
+        <h1 className="text-2xl font-bold mb-4">Error al cargar los productos</h1>
+        <p>Error al cargar los productos. Intentalo de nuevo más tarde.</p>
       </div>
     );
   }
-
 
   return (
     <main className="container mx-auto px-4 py-8">

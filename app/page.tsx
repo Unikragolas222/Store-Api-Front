@@ -5,24 +5,30 @@ import { Product } from './interfaces/Product';
 export const dynamic = "force-dynamic";
 
 async function getProducts(): Promise<Product[]> {
-  // This fetch is wrapped in a try...catch to handle network errors gracefully.
   try {
-    const res = await fetch('https://fakestoreapi.com/products');
+    // The { cache: 'no-store' } option is crucial for Vercel deployments.
+    // It prevents caching of the fetch response, ensuring fresh data on every request.
+    const res = await fetch('https://fakestoreapi.com/products', { cache: 'no-store' });
 
-    // Check if the response is ok (status in the range 200-299)
     if (!res.ok) {
-      // Log the error for debugging purposes on the server
-      console.error(`Error fetching products: ${res.status} ${res.statusText}`);
-      // Return an empty array to prevent the page from crashing
+      // If the response is not OK, read the response as text to see what was actually returned.
+      const errorText = await res.text();
+      console.error(`Error fetching products: ${res.status} ${res.statusText}`, errorText);
       return [];
     }
 
-    const data = await res.json();
-    return data;
+    const contentType = res.headers.get("content-type");
+    if (contentType && contentType.indexOf("application/json") !== -1) {
+      return res.json();
+    } else {
+      // If the content type is not JSON, it's an error.
+      const responseText = await res.text();
+      console.error("Expected JSON but received different content type:", contentType, responseText);
+      return [];
+    }
+
   } catch (error) {
-    // This will catch network errors (e.g., DNS resolution, TCP connection)
     console.error("Failed to connect to the products API.", error);
-    // Return an empty array to ensure the page can still render.
     return [];
   }
 }

@@ -2,7 +2,6 @@
 'use client';
 
 import { useCart } from '../context/CartContext';
-import Image from 'next/image';
 
 interface ShoppingCartProps {
   isOpen: boolean;
@@ -45,7 +44,7 @@ export default function ShoppingCart({ isOpen, onClose }: ShoppingCartProps) {
           <div className="divide-y divide-zinc-200 dark:divide-zinc-800 -m-4 p-4">
             {cartItems.map((item) => (
               <div key={item.id} className="flex items-center py-4 first:pt-0 last:pb-0">
-                <Image src={item.image} alt={item.title} width={64} height={64} className="object-contain p-1 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white" />
+                <img src={item.image} alt={item.title} width={64} height={64} className="object-contain p-1 rounded-md border border-zinc-200 dark:border-zinc-700 bg-white" />
                 <div className="flex-grow ml-4">
                   <p className="font-semibold text-sm text-black dark:text-white leading-tight">{item.title}</p>
                   <p className="text-zinc-500 dark:text-zinc-400 text-xs mt-1">{item.quantity} x ${item.price.toFixed(2)}</p>

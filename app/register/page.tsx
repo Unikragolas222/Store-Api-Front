@@ -23,8 +23,12 @@ export default function Register() {
         await createUserWithEmailAndPassword(auth, email, password);
       }
       router.push('/'); // Redirect to home on successful login/signup
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err) {
+        if (err instanceof Error) {
+            setError(err.message);
+        } else {
+            setError('An unknown error occurred');
+        }
     }
   };
 

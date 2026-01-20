@@ -39,3 +39,4 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 el link de la pagina donde esta la pagina desplegada:
 
 https://storeapifront-vylq6qoe9-unikragolas222s-projects.vercel.app/
+https://storeapifront.vercel.app

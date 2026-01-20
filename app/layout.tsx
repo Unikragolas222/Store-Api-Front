@@ -18,9 +18,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// Define a User interface
+interface User {
+    name: string;
+    email: string;
+  }
+
 // Mock Auth context
 interface AuthContextType {
-    user: any | null;
+    user: User | null;
     loading: boolean;
   }
   
@@ -28,8 +34,8 @@ const AuthContext = createContext<AuthContextType>({ user: null, loading: false 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
-    const [user, setUser] = useState<any | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [user] = useState<User | null>(null);
+    const [loading] = useState(false);
   
     return (
       <AuthContext.Provider value={{ user, loading }}>

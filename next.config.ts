@@ -5,9 +5,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'fakestoreapi.com',
+        hostname: 'vpouamwzanbrzqgvqbty.supabase.co',
         port: '',
-        pathname: '/img/**',
+        pathname: '/storage/v1/object/public/images/**',
       },
     ],
   },

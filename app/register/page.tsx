@@ -2,8 +2,6 @@
 'use client';
 
 import { useState } from 'react';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../lib/firebase';
 import { useRouter } from 'next/navigation';
 
 export default function Register() {
@@ -16,19 +14,13 @@ export default function Register() {
   const handleAuthAction = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
-    try {
-      if (isLogin) {
-        await signInWithEmailAndPassword(auth, email, password);
-      } else {
-        await createUserWithEmailAndPassword(auth, email, password);
-      }
+    // Mock authentication logic
+    if (email && password) {
+      console.log('Email:', email);
+      console.log('Password:', password);
       router.push('/'); // Redirect to home on successful login/signup
-    } catch (err) {
-        if (err instanceof Error) {
-            setError(err.message);
-        } else {
-            setError('An unknown error occurred');
-        }
+    } else {
+      setError('Please enter a valid email and password.');
     }
   };
 

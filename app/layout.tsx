@@ -4,9 +4,7 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { CartProvider, useCart } from './context/CartContext';
-import { AuthProvider, useAuth } from '../contexts/AuthContext';
-import { auth } from '../lib/firebase';
-import { useState } from 'react';
+import { useState, createContext, useContext, ReactNode } from 'react';
 import ShoppingCart from './components/ShoppingCart';
 import Link from 'next/link';
 
@@ -19,6 +17,27 @@ const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
 });
+
+// Mock Auth context
+interface AuthContextType {
+    user: any | null;
+    loading: boolean;
+  }
+  
+const AuthContext = createContext<AuthContextType>({ user: null, loading: false });
+export const useAuth = () => useContext(AuthContext);
+
+export const AuthProvider = ({ children }: { children: ReactNode }) => {
+    const [user, setUser] = useState<any | null>(null);
+    const [loading, setLoading] = useState(false);
+  
+    return (
+      <AuthContext.Provider value={{ user, loading }}>
+        {children}
+      </AuthContext.Provider>
+    );
+  };
+
 
 function CartIcon() {
     const { cartItems } = useCart();
@@ -42,7 +61,7 @@ function Header({ toggleCart }: { toggleCart: () => void }) {
   const { user, loading } = useAuth();
 
   const handleLogout = async () => {
-    await auth.signOut();
+    console.log("Logout clicked");
   };
 
   return (
